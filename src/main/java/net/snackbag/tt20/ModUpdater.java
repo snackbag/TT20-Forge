@@ -7,6 +7,7 @@ import net.snackbag.shit.web.WebResponse;
 
 import java.io.IOException;
 import java.net.MalformedURLException;
+import java.net.URI;
 import java.net.URL;
 
 public class ModUpdater {
@@ -16,7 +17,7 @@ public class ModUpdater {
 
     static {
         try {
-            updateUrl = new URL("https://playout.snackbag.net/updater/v1/tt20");
+            updateUrl = URI.create("https://playout.snackbag.net/updater/v1/tt20").toURL();
         } catch (MalformedURLException e) {
             throw new RuntimeException(e);
         }
