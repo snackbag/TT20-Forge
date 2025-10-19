@@ -27,7 +27,11 @@ public abstract class ServerPlayerListMixin {
         //?}
         if (!TT20.config.automaticUpdater() || !ModUpdater.hasUpdate) return;
 
+        //? if >=1.21.9 {
+        /*if (Objects.requireNonNull(((ServerPlayerMixin) player).getServer()).getPlayerList().isOp(player.nameAndId())) {
+        *///?} else {
         if (Objects.requireNonNull(player.getServer()).getPlayerList().isOp(player.getGameProfile())) {
+        //?}
             player.sendSystemMessage(Component.literal(ModUpdater.updateMessage));
             player.sendSystemMessage(Component.literal("§oOnly operators can see this message"));
         }

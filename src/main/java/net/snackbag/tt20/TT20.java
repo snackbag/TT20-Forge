@@ -4,8 +4,12 @@ import com.mojang.logging.LogUtils;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.RegisterCommandsEvent;
+//? if >=1.21.9 {
+/*import net.minecraftforge.eventbus.api.listener.SubscribeEvent;
+*///?} else {
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
+ //?}
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
@@ -32,10 +36,13 @@ public class TT20 {
     public static final BlockEntityMaskConfig blockEntityMaskConfig = new BlockEntityMaskConfig();
 
     public TT20(FMLJavaModLoadingContext context) {
+        //? if >=1.21.9 {
+        /*var modBusGroup = context.getModBusGroup();
+        FMLCommonSetupEvent.getBus(modBusGroup).addListener(this::commonSetup);
+        *///?} else {
         IEventBus modEventBus = context.getModEventBus();
-
         modEventBus.addListener(this::commonSetup);
-
+         //?}
         MinecraftForge.EVENT_BUS.register(TPS_CALCULATOR);
     }
 

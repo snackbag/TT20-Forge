@@ -11,6 +11,7 @@
     /*"PortalProcessorMixin",
     *///?}
     "ServerPlayerListMixin",
+    "ServerPlayerMixin",
     "fluid.LavaFluidMixin",
     "fluid.WaterFluidMixin",
     "item.ItemEntityMixin",
