@@ -1,3 +1,4 @@
 - Gradle configuration
 - TPSCalculator contains onServerTick
 - Forge does not allow for accesstransformers with Stonecutter. Do Mixin and JVM trickery instead!
+- Parchment mappings are used instead of Yarn
