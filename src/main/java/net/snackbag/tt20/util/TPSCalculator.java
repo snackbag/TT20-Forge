@@ -26,10 +26,10 @@ public class TPSCalculator {
 
     /** DIFFERENCE! **/
     /** New method **/
-    @SubscribeEvent
     //? if >=1.21.9 {
     /*public void onServerTick(TickEvent.ServerTickEvent.Pre event) {
     *///?} else {
+    @SubscribeEvent
     public void onServerTick(TickEvent.ServerTickEvent event) {
         if (event.phase != TickEvent.Phase.START) return;
     //?}

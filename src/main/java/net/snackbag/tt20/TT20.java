@@ -5,7 +5,8 @@ import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.RegisterCommandsEvent;
 //? if >=1.21.9 {
-/*import net.minecraftforge.eventbus.api.listener.SubscribeEvent;
+/*import net.minecraftforge.event.TickEvent;
+import net.minecraftforge.eventbus.api.listener.SubscribeEvent;
 *///?} else {
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -39,11 +40,14 @@ public class TT20 {
         //? if >=1.21.9 {
         /*var modBusGroup = context.getModBusGroup();
         FMLCommonSetupEvent.getBus(modBusGroup).addListener(this::commonSetup);
+
+        TickEvent.ServerTickEvent.Pre.BUS.addListener(TPS_CALCULATOR::onServerTick);
         *///?} else {
         IEventBus modEventBus = context.getModEventBus();
         modEventBus.addListener(this::commonSetup);
-         //?}
+
         MinecraftForge.EVENT_BUS.register(TPS_CALCULATOR);
+         //?}
     }
 
     private void commonSetup(final FMLCommonSetupEvent event) {
