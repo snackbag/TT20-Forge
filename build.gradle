@@ -26,11 +26,6 @@ println "Java: ${System.getProperty 'java.version'}, JVM: ${System.getProperty '
 minecraft {
     mappings channel: mapping_channel, version: mapping_version
 
-    // from 1.21.10 mdk
-    if (stonecutter.current.version >= "1.20.6") {
-        reobf = false
-    }
-
     copyIdeResources = true
 
     accessTransformer = file('src/main/resources/META-INF/accesstransformer.cfg')
@@ -144,7 +139,9 @@ tasks.named('jar', Jar).configure {
         ])
     }
 
-    finalizedBy 'reobfJar'
+    if (stonecutter.current.version <= "1.20.6") {
+        finalizedBy 'reobfJar'
+    }
 }
 
 publishing {
