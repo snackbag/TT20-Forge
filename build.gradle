@@ -16,9 +16,6 @@ base {
     archivesName = mod_id
 }
 
-println("stonecutter.current.version: ${stonecutter.current.version}")
-println("greater than 1.20.5? : ${stonecutter.current.version >= '1.20.5'}")
-
 if (stonecutter.current.version >= "1.20.5") {
     java.toolchain.languageVersion = JavaLanguageVersion.of(21)
 } else {
@@ -91,16 +88,8 @@ repositories {
         name = 'Minecraft libraries'
         url = 'https://libraries.minecraft.net'
     }
-    exclusiveContent {
-        forRepository {
-            maven {
-                name = 'Sponge'
-                url = 'https://repo.spongepowered.org/repository/maven-public'
-            }
-        }
-        filter {
-            includeGroupAndSubgroups('org.spongepowered')
-        }
+    maven {
+        url = 'https://repo.spongepowered.org/maven'
     }
     maven {  // ShitLib
         name = 'SnackBag'
@@ -115,11 +104,13 @@ dependencies {
         annotationProcessor 'net.minecraftforge:eventbus-validator:7.0-beta.12'
     }
 
-    implementation 'org.spongepowered:mixin:0.8.5'
-    annotationProcessor 'org.spongepowered:mixin:0.8.5:processor'
+    implementation 'org.spongepowered:mixin:0.8.7'
+    annotationProcessor 'org.spongepowered:mixin:0.8.7:processor'
 
-    compileOnly(annotationProcessor("io.github.llamalad7:mixinextras-common:0.4.1"))
-    annotationProcessor 'io.github.llamalad7:mixinextras-common:0.4.1'
+    compileOnly(annotationProcessor("io.github.llamalad7:mixinextras-common:0.5.0"))
+    implementation(jarJar("io.github.llamalad7:mixinextras-forge:0.5.0")) {
+        jarJar.ranged(it, "[0.5.0,)")
+    }
 
     implementation "net.snackbag.shit:shit:${project.shitlib_version}"
     //include "net.snackbag.shit:shit:${project.shitlib_version}"
