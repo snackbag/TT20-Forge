@@ -16,7 +16,11 @@ base {
     archivesName = mod_id
 }
 
-if (stonecutter.current.version >= "1.20.5") {
+def compareWith(String version) {
+    return stonecutter.compare(stonecutter.current.version, version)
+}
+
+if (compareWith("1.20.5") >= 0) {
     java.toolchain.languageVersion = JavaLanguageVersion.of(21)
 } else {
     java.toolchain.languageVersion = JavaLanguageVersion.of(17)
@@ -69,7 +73,9 @@ minecraft {
 sourceSets.main.resources { srcDir 'src/generated/resources' }
 
 mixin {
-    add sourceSets.main, "refmap.tt20.json"
+    if (compareWith('1.20.6') < 0) {
+        add sourceSets.main, "refmap.tt20.json"
+    }
     config "mixin.tt20.json"
 }
 
@@ -95,16 +101,20 @@ repositories {
 dependencies {
     minecraft "net.minecraftforge:forge:${minecraft_version}-${forge_version}"
 
-    if (stonecutter.current.version >= '1.21.6') {
-        annotationProcessor 'net.minecraftforge:eventbus-validator:7.0-beta.12'
-    }
-
     implementation 'org.spongepowered:mixin:0.8.7'
     annotationProcessor 'org.spongepowered:mixin:0.8.7:processor'
 
-    compileOnly(annotationProcessor("io.github.llamalad7:mixinextras-common:0.5.0"))
-    implementation(jarJar("io.github.llamalad7:mixinextras-forge:0.5.0")) {
-        jarJar.ranged(it, "[0.5.0,)")
+    if (compareWith('1.21.6') >= 0) {
+        annotationProcessor 'net.minecraftforge:eventbus-validator:7.0-beta.12'
+
+        testAnnotationProcessor 'org.spongepowered:mixin:0.8.7:processor'
+    }
+
+    if (compareWith('1.21.10') < 0) {
+        compileOnly(annotationProcessor("io.github.llamalad7:mixinextras-common:0.5.0"))
+        implementation(jarJar("io.github.llamalad7:mixinextras-forge:0.5.0")) {
+            jarJar.ranged(it, "[0.5.0,)")
+        }
     }
 
     implementation "net.snackbag.shit:shit:${project.shitlib_version}"
@@ -139,7 +149,7 @@ tasks.named('jar', Jar).configure {
         ])
     }
 
-    if (stonecutter.current.version <= "1.20.6") {
+    if (compareWith('1.20.6') < 0) {
         finalizedBy 'reobfJar'
     }
 }
@@ -163,7 +173,7 @@ tasks.withType(JavaCompile).configureEach {
 
 idea.module { downloadJavadoc = downloadSources = true }
 
-if (stonecutter.current.version >= '1.21.10') {
+if (compareWith('1.21.10') >= 0) {
     sourceSets.each {
         def dir = layout.buildDirectory.dir("sourcesSets/$it.name")
         it.output.resourcesDir = dir
