@@ -14,10 +14,18 @@ public class MainCommand {
                         .then(Commands.literal("tps").executes(ctx -> executeTps(ctx, true)))
                         .then(Commands.literal("status").executes(MainCommand::executeStatus))
                         .then(Commands.literal("toggle")
+                                //? if >=1.21.11 {
+                                /*.requires(Commands.hasPermission(Commands.LEVEL_ADMINS))
+                                *///?} else {
                                 .requires(src -> src.hasPermission(3))
+                                //?}
                                 .executes(MainCommand::executeToggle))
                         .then(Commands.literal("reload")
+                                //? if >=1.21.11 {
+                                /*.requires(Commands.hasPermission(Commands.LEVEL_GAMEMASTERS))
+                                *///?} else {
                                 .requires(src -> src.hasPermission(2))
+                                //?}
                                 .executes(MainCommand::executeReload))
         );
     }
@@ -66,8 +74,8 @@ public class MainCommand {
             //?} else {
             /*source.sendSuccess(Component.literal(
                     "§8Missed ticks: §7" + TPSUtil.formatMissedTicks(TT20.TPS_CALCULATOR.getAllMissedTicks())
-            ), false);*/
-            //?}
+            ), false);
+            *///?}
         }
 
         return 1;

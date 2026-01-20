@@ -16,19 +16,19 @@ import net.snackbag.tt20.util.TPSUtil;
 @Mixin(Player.class)
 public abstract class PlayerMixin {
     @Unique
-    private boolean isClient(Entity entity) {
+    private boolean TT20$isClient(Entity entity) {
         //? if >=1.20.1 {
         return entity.level().isClientSide();
         //?} else {
-        /*return entity.getLevel().isClientSide();*/
-        //?}
+        /*return entity.getLevel().isClientSide();
+        *///?}
     }
 
     //? if <1.21 {
     @ModifyReturnValue(method = "getPortalWaitTime", at = @At("RETURN"))
     private int netherPortalTimeTT20(int original) {
         if (!TT20.config.enabled() || !TT20.config.portalAcceleration()) return original;
-        if (isClient((Entity) (Object) this)) return original;
+        if (TT20$isClient((Entity) (Object) this)) return original;
         if (original == 1) return original;
 
         return TPSUtil.tt20(original, false);
