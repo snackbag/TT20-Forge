@@ -48,7 +48,7 @@ minecraft {
 
             property 'forge.logging.console.level', 'debug'
 
-            /*if (compareWith("1.21.9") >= 0) {
+            if (compareWith("1.21.9") >= 0) {
                 property 'eventbus.api.strictRuntimeChecks', 'true'
 
                 arg "-mixin.config=mixin.${mod_id}.json"
@@ -58,7 +58,7 @@ minecraft {
                         source sourceSets.main
                     }
                 }
-            }*/
+            }
         }
 
         client {
@@ -127,10 +127,10 @@ repositories {
 dependencies {
     minecraft "net.minecraftforge:forge:${minecraft_version}-${forge_version}"
 
-    /*if (compareWith("1.21.9") < 0) {
+    if (compareWith("1.21.9") < 0) {
         implementation 'org.spongepowered:mixin:0.8.7'
         annotationProcessor 'org.spongepowered:mixin:0.8.7:processor'
-    }*/
+    }
 
     if (compareWith('1.21.6') >= 0) {
         annotationProcessor 'net.minecraftforge:eventbus-validator:7.0-beta.12'
