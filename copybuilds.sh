@@ -1,12 +1,30 @@
-# script to copy build files into one public-builds directory
-version=0.7.1
+#!/usr/bin/env bash
+set -e
 
-mkdir -p publish-builds
+mod_id="$(grep -E '^mod_id=' gradle.properties | cut -d'=' -f2)"
+mod_version="$(grep -E '^mod_version=' gradle.properties | cut -d'=' -f2)"
 
-cp versions/1.19.2/build/libs/tt20-$version.jar publish-builds/tt20-$version+mc1.19.2.jar
-cp versions/1.20.1/build/libs/tt20-$version.jar publish-builds/tt20-$version+mc1.20.1.jar
-cp versions/1.20.6/build/libs/tt20-$version.jar publish-builds/tt20-$version+mc1.20.6.jar
-cp versions/1.21/build/libs/tt20-$version.jar publish-builds/tt20-$version+mc1.21.jar
-cp versions/1.21.5/build/libs/tt20-$version.jar publish-builds/tt20-$version+mc1.21.5.jar
-cp versions/1.21.9/build/libs/tt20-$version.jar publish-builds/tt20-$version+mc1.21.9.jar
-cp versions/1.21.10/build/libs/tt20-$version.jar publish-builds/tt20-$version+mc1.21.10.jar
+if [ -z "$mod_version" ]; then
+  echo "mod_version not found!"
+  exit 1
+fi
+
+echo "Found mod properties: $mod_id-$mod_version"
+
+out_dir="publish-builds"
+mkdir -p "$out_dir"
+
+for mcdir in versions/*; do
+  [ -d "$mcdir" ] || continue
+
+  mcver="$(basename "$mcdir")"
+  jar="$mcdir/build/libs/$mod_id-$mod_version.jar"
+  out="$out_dir/$mod_id-$mod_version+mc$mcver.jar"
+
+  if [ -f "$jar" ]; then
+    cp "$jar" "$out"
+    echo "Copied mc$mcver"
+  else
+    echo "Skipping mc$mcver (not found)"
+  fi
+done
