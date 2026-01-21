@@ -2,10 +2,10 @@ package net.snackbag.tt20.util;
 
 import net.minecraftforge.event.TickEvent;
 //? if >=1.21.9 {
-/*import net.minecraftforge.eventbus.api.listener.SubscribeEvent;
-*///?} else {
-import net.minecraftforge.eventbus.api.SubscribeEvent;
-//?}
+import net.minecraftforge.eventbus.api.listener.SubscribeEvent;
+//?} else {
+/*import net.minecraftforge.eventbus.api.SubscribeEvent;
+*///?}
 
 import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
@@ -27,12 +27,12 @@ public class TPSCalculator {
     /** DIFFERENCE! **/
     /** New method **/
     //? if >=1.21.9 {
-    /*public void onServerTick(TickEvent.ServerTickEvent.Pre event) {
-    *///?} else {
-    @SubscribeEvent
+    public void onServerTick(TickEvent.ServerTickEvent.Pre event) {
+    //?} else {
+    /*@SubscribeEvent
     public void onServerTick(TickEvent.ServerTickEvent event) {
         if (event.phase != TickEvent.Phase.START) return;
-    //?}
+    *///?}
 
         if (currentTick != null) {
             lastTick = currentTick;

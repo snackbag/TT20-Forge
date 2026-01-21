@@ -1,6 +1,6 @@
 package net.snackbag.tt20.mixin;
 //? if >=1.21 {
-/*import com.llamalad7.mixinextras.injector.ModifyExpressionValue;
+import com.llamalad7.mixinextras.injector.ModifyExpressionValue;
 import com.llamalad7.mixinextras.sugar.Local;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.entity.PortalProcessor;
@@ -24,4 +24,4 @@ public abstract class PortalProcessorMixin {
         return portalTime;
     }
 }
-*///?}
+//?}

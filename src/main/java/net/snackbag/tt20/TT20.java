@@ -5,12 +5,12 @@ import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.RegisterCommandsEvent;
 //? if >=1.21.9 {
-/*import net.minecraftforge.event.TickEvent;
+import net.minecraftforge.event.TickEvent;
 import net.minecraftforge.eventbus.api.listener.SubscribeEvent;
-*///?} else {
-import net.minecraftforge.eventbus.api.IEventBus;
+//?} else {
+/*import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
- //?}
+ *///?}
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
@@ -38,16 +38,16 @@ public class TT20 {
 
     public TT20(FMLJavaModLoadingContext context) {
         //? if >=1.21.9 {
-        /*var modBusGroup = context.getModBusGroup();
+        var modBusGroup = context.getModBusGroup();
         FMLCommonSetupEvent.getBus(modBusGroup).addListener(this::commonSetup);
 
         TickEvent.ServerTickEvent.Pre.BUS.addListener(TPS_CALCULATOR::onServerTick);
-        *///?} else {
-        IEventBus modEventBus = context.getModEventBus();
+        //?} else {
+        /*IEventBus modEventBus = context.getModEventBus();
         modEventBus.addListener(this::commonSetup);
 
         MinecraftForge.EVENT_BUS.register(TPS_CALCULATOR);
-         //?}
+         *///?}
     }
 
     private void commonSetup(final FMLCommonSetupEvent event) {
